@@ -1,0 +1,53 @@
+OutLine:
+1.divide the data into training and testing data set
+2.create the tree
+3.check accuracy
+
+libreries:
+ 
+	 import numpy as np
+	 import pandas as pd
+	 from matplotlib import pyplot as plt
+	 import random 
+	 import seaborn as sns
+	 from pprint import ppprint
+	 
+Step 1:
+
+    Step a:
+           Read the data and do data wrangling by droping the 'id' and check for any missing data:
+		   
+		   df=pd.read_csv(Location with Filename)
+		   df=df.drop('Id', axis=1)
+           df=df.remane(columns={'Species':'label'})
+           df.info() 'Check for any null present'
+ 	Step b:
+         
+           Spliting the data set.
+			
+		   def train_test_split(df,test_size):
+		    
+			'test_size variable determines how many testing rows of data are to be required. '
+			'If user has given the test_size as percentage say 20% of origal dataframe. Then convertion neds to be done or else this below part of code will be simpli ignored.'
+			 
+			 if isinstance(test_size,float):
+				
+				test_size=round(test_size*len(df))
+			 
+			 
+			 'taking out the index of dataframe to a list'
+			 indices=df.index.tolist() 
+			 
+			 test_indices=random.sample(index,test_size)
+			 
+			 'creating the dataframe having only test data from original dataframe'
+			 test_df=df.loc[test_indices]
+			 
+			 'creating the training data set'
+			 train_df=df.drop(test_df)
+			
+		   
+		   return train_df,test_df;
+		   
+		   
+		   
